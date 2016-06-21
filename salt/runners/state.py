@@ -20,7 +20,8 @@ def orchestrate(mods,
                 test=None,
                 exclude=None,
                 pillar=None,
-                pillarenv=None):
+                pillarenv=None,
+                outputter='highstate'):
     '''
     .. versionadded:: 0.17.0
 
@@ -61,7 +62,7 @@ def orchestrate(mods,
             exclude,
             pillar=pillar,
             pillarenv=pillarenv)
-    ret = {'data': {minion.opts['id']: running}, 'outputter': 'highstate'}
+    ret = {'data': {minion.opts['id']: running}, 'outputter': outputter}
     res = salt.utils.check_state_result(ret['data'])
     if res:
         ret['data']['retcode'] = 0
